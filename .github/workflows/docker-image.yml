@@ -28,10 +28,12 @@ jobs:
     - name: Build Docker Image
       run: |
         docker build -t adralx/docker-basic-graphql:0.0.1 .
+        docker build -t adralx/docker-basic-graphql:latest .
 
     - name: Push Docker Image
       run: |
         docker push adralx/docker-basic-graphql:0.0.1
+        docker push adralx/docker-basic-graphql:latest
 
 
 #   - name: Build the Docker image
