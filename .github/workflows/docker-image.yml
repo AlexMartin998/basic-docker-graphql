@@ -31,24 +31,24 @@ jobs:
       env:
         DOCKER_USER: ${{secrets.DOCKER_HUB}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD     
+
+
+    - name: Build Docker Image
+      env:
         NEW_VERSION: ${{steps.version.outputs.version}}
       run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-        echo "New Version: $NEW_VERSION !!!!!!"
-        
+        docker build -t adralx/docker-basic-graphql:$NEW_VERSION .
+        docker build -t adralx/docker-basic-graphql:latest .
 
+    - name: Push Docker Image
+      env:
+        NEW_VERSION: ${{steps.version.outputs.version}}
+      run: |
+        docker push adralx/docker-basic-graphql:NEW_VERSION
+        docker push adralx/docker-basic-graphql:latest
 
-
-
-#     - name: Build Docker Image
-#       run: |
-#         docker build -t adralx/docker-basic-graphql:0.0.1 .
-#         docker build -t adralx/docker-basic-graphql:latest .
-
-#     - name: Push Docker Image
-#       run: |
-#         docker push adralx/docker-basic-graphql:0.0.1
-#         docker push adralx/docker-basic-graphql:latest
 
 
 #   - name: Build the Docker image
