@@ -46,7 +46,7 @@ jobs:
       env:
         NEW_VERSION: ${{steps.version.outputs.version}}
       run: |
-        docker push adralx/docker-basic-graphql:NEW_VERSION
+        docker push adralx/docker-basic-graphql:$NEW_VERSION
         docker push adralx/docker-basic-graphql:latest
 
 
